@@ -1,0 +1,197 @@
+package controller;
+    import java.io.BufferedReader;
+    import java.io.InputStreamReader;
+    import java.time.LocalDate;
+    import java.util.ArrayList;
+    import java.util.HashMap;
+    import java.util.Map;
+import java.util.Scanner;
+
+import model.Kamar;
+    import model.Penyewa;
+    import model.Owner;
+    import model.Penyewaan;
+    import model.DetailKamar;
+
+public class AppController {
+    HashMap<String, Kamar> kamars = new HashMap();
+    HashMap<String, Penyewa> penyewas = new HashMap();
+    HashMap<String, Owner> owners = new HashMap();
+    ArrayList<Penyewaan>penyewaans = new ArrayList<>();
+
+    public void setUp() {
+        Kamar kamarA1 = new Kamar();
+        Kamar kamarA2 = new Kamar();
+        Kamar kamarA3= new Kamar();
+        Kamar kamarB1= new Kamar();
+        Kamar kamarB2= new Kamar();
+        Kamar kamarB3= new Kamar();
+        
+        kamarA1.setJenisKamar("Reguler(Kasur, Lemari, Wc diluar)").setIdKamar("A1").setHargaKamar(500000).setIsAvailable(true);
+        kamarA2.setJenisKamar("Reguler(Kasur, Lemari, Wc diluar)").setIdKamar("A2").setHargaKamar(500000).setIsAvailable(true);
+        kamarA3.setJenisKamar("Reguler(Kasur, Lemari, Wc diluar)").setIdKamar("A3").setHargaKamar(500000).setIsAvailable(true);
+        kamarB1.setJenisKamar("VIP(Kasur, Lemari, Wc didalam, AC)").setIdKamar("B1").setHargaKamar(1000000).setIsAvailable(true);
+        kamarB2.setJenisKamar("VIP(Kasur, Lemari, Wc didalam, AC)").setIdKamar("B2").setHargaKamar(1000000).setIsAvailable(true);
+        kamarB3.setJenisKamar("VIP(Kasur, Lemari, Wc didalam, AC)").setIdKamar("B3").setHargaKamar(1000000).setIsAvailable(true);
+
+        
+        kamars.put(kamarA1.getIdKamar(), kamarA1);
+        kamars.put(kamarA2.getIdKamar(), kamarA2);
+        kamars.put(kamarA3.getIdKamar(), kamarA3);
+        kamars.put(kamarB1.getIdKamar(), kamarB1);
+        kamars.put(kamarB2.getIdKamar(), kamarB2);
+        kamars.put(kamarB3.getIdKamar(), kamarB3);
+        
+        
+        Penyewa Penyewa1 = new Penyewa();
+        Penyewa Penyewa2 = new Penyewa();
+
+        Penyewa1.setIdPenyewa("P1").setJenisKelamin("Laki-Laki").setNoTelp("085797047633").setNama("Raihan").setEmail("raian@gmail.com").setAlamat("Bandung");
+        Penyewa2.setIdPenyewa("P2").setJenisKelamin("Perempuan").setNoTelp("085797047644").setNama("Layla").setEmail("layla@gmail.com").setAlamat("Jakarta");
+
+        penyewas.put(Penyewa1.getIdPenyewa(), Penyewa1);
+        penyewas.put(Penyewa2.getIdPenyewa(), Penyewa2);
+        
+        Owner Owner1 = new Owner();
+
+        Owner1.setIdOwner("P1").setJenisKelamin("Laki-Laki").setNoTelp("085797035322").setNama("Rifqi Ilhami").setEmail("rifqi@gmail.com").setAlamat("Bandung");
+
+        owners.put(Owner1.getIdOwner(), Owner1);
+    }
+    // public void Psewa(){
+    //     String y;
+    //     String JK;
+    //     Scanner input = new Scanner(System.in);
+    //     Penyewa Penyewa1 = new Penyewa();
+    //     System.out.print("Nama: ");
+    //     y = input.nextLine();
+    //     System.out.print("Jenis Kelamin: ");
+    //     JK = input.nextLine();
+    //     Penyewa1.setIdPenyewa(y).setJenisKelamin(JK);
+    //     penyewas.put(Penyewa1.getIdPenyewa(), Penyewa1);
+        
+    //     Scanner inputKonfirmasi = new Scanner(System.in);
+    //     System.out.println("Konfirmasi Penyewaan (Y/N)?");
+    //     String konfirm = "n";
+    //     konfirm = inputKonfirmasi.nextLine();
+    //     if (konfirm.equalsIgnoreCase("y")) {
+    //         Penyewa penyewa = new Penyewa();
+    //         penyewa.setIdPenyewa(y)
+    //                 .setJenisKelamin(JK);
+    //                 System.out.println("Penyewa \t \t : "+penyewa.getIdPenyewa().getNama());
+                    
+    //     }
+    // }
+
+    public void lihatDaftarKamar() {
+        System.out.println();
+        System.out.println("==== Daftar Kamar ====");
+        for (Map.Entry<String, Kamar> Kamar : kamars.entrySet()) {
+            String key = Kamar.getKey();
+            Kamar tKamar = Kamar.getValue();
+            if (tKamar.isIsAvailable()) {
+                System.out.println("No Kamar \t :" + key);
+                System.out.println("Nama \t\t :" + tKamar.getJenisKamar());
+                System.out.println("Harga \t\t :" + tKamar.getHargaKamar());
+                System.out.println();
+            }
+
+        }
+    }
+
+    public Kamar getKamar(String idKamar) {
+        return kamars.get(idKamar);
+    }
+
+    public Penyewa getPenyewa(String idPenyewa) {
+        return penyewas.get(idPenyewa);
+    }
+
+    public Owner getOwner(String idOwner) {
+        return owners.get(idOwner);
+    }
+
+    public void sewa() {
+        BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
+        ArrayList<DetailKamar> tDetailKamars = new ArrayList<>();
+        int increment = 0;
+        String lanjut = "";
+        try {
+            do {
+                increment++;
+                System.out.println();
+                System.out.print("Silahkan masukkan No Kamar\t: ");
+                String NoKamar = input.readLine();
+                System.out.print("Jumlah yang akan dibeli\t: ");
+                int jumlah = Integer.valueOf(input.readLine());
+                System.out.print("Kembali berKamar (Y/N)?\t: ");
+                lanjut = input.readLine();
+
+                DetailKamar dk = new DetailKamar();
+                Kamar tKamar = getKamar(NoKamar);
+                dk.setIdDetailKamar("dk" + increment);
+                dk.setKamar(tKamar);
+                dk.setHargaJual(tKamar.getHargaKamar());
+                dk.setSubTotal(tKamar.getHargaKamar() * jumlah);
+                tDetailKamars.add(dk);
+
+            } while (lanjut.equalsIgnoreCase("Y"));
+
+            System.out.println("");
+            System.out.println("===Berikut Daftar Kamar Anda===");
+            tampilkanDaftarKamar(tDetailKamars);
+            System.out.println("TOTAL: " + hitungTotalKamar(tDetailKamars));
+            BufferedReader inputKonfirmasi = new BufferedReader(new InputStreamReader(System.in));
+            System.out.println("Konfirmasi Penyewaan (Y/N)?");
+            String konfirm = "n";
+            konfirm = inputKonfirmasi.readLine();
+            if (konfirm.equalsIgnoreCase("y")) {
+                Penyewaan penyewaan = new Penyewaan();
+                penyewaan.setDetailKamars(tDetailKamars);
+                penyewaan.setIdPenyewaan("P" + penyewaans.size() + 1);
+                penyewaan.setPenyewa(getPenyewa("P1"));
+                penyewaan.setOwner(getOwner("P1"));
+                penyewaan.setTanggal(LocalDate.now());
+                penyewaan.setTotal(hitungTotalKamar(tDetailKamars));
+                penyewaans.add(penyewaan);
+            }
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+    public void tampilkanDaftarKamar(ArrayList<DetailKamar> dp) {
+        for (DetailKamar detailKamar : dp) {
+            System.out.println("No Kamar \t :" + detailKamar.getKamar().getIdKamar());
+            System.out.println("Jenis Kamar \t :" + detailKamar.getKamar().getJenisKamar());
+            System.out.println("Harga \t :" + detailKamar.getHargaJual());
+            System.out.println("");
+        }
+    }
+
+    public int hitungTotalKamar(ArrayList<DetailKamar> dk) {
+        int total = 0;
+        for (DetailKamar detailKamar : dk) {
+            total += detailKamar.getSubTotal();
+        }
+        return total;
+    }
+
+    public void tampilkanLaporanPenyewaan() {
+        for (Penyewaan penyewaan : penyewaans) {
+            System.err.println();
+            System.out.println("No Penyewaan \t :"+penyewaan.getIdPenyewaan());
+            System.out.println("Tanggal transaksi \t :"+penyewaan.getTanggal());
+            System.out.println("Owner \t \t : "+penyewaan.getOwner().getNama());
+            System.out.println("Penyewa \t \t : "+penyewaan.getPenyewa().getNama());
+            System.out.println("=========================");
+            ArrayList<DetailKamar> detailKamars = penyewaan.getDetailKamars();
+            for (DetailKamar dk : detailKamars) {
+                System.out.println("Jenis Kamar \t \t : " + dk.getKamar().getJenisKamar());
+                System.out.println("Subtotal \t \t : " + dk.getSubTotal());
+            }
+            System.out.println("=========================");
+            System.out.println("Total \t \t : "+penyewaan.getTotal());
+        }
+    }
+}
