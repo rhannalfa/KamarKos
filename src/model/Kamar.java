@@ -4,6 +4,17 @@ public class Kamar {
     private String noKamar;
     private String jenisKamar;
     private int hargaKamar;
+    private int bulan;
+
+    public int getBulan() {
+        return bulan;
+    }
+
+    public Kamar setBulan(int bulan) {
+        this.bulan = bulan;
+        return this;
+    }
+
     private boolean isAvailable;
 
     //Set Method

@@ -27,8 +27,8 @@ public class Penyewa extends Akun {
         return noTelp;
     }
 
-    public Penyewa setNoTelp(String jenisKelamin) {
-        this.jenisKelamin = jenisKelamin;
+    public Penyewa setNoTelp(String noTelp) {
+        this.noTelp = noTelp;
         return this;
     }
 
