@@ -2,13 +2,8 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.Scanner;
 
 import controller.AppController;
-import model.Kamar;
-import model.Penyewa;
-import model.Owner;
 
 public class App {
 
@@ -17,7 +12,6 @@ public class App {
         appController.setUp();
         boolean lanjut = true;
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-        appController.Psewa();
         appController.dataPenyewa();
         while (lanjut) {
             tampilkanMenu();
@@ -25,12 +19,9 @@ public class App {
             String pilihan = reader.readLine();
             switch (pilihan) {
                 case "1":
-                    appController.lihatDaftarKamar();
-                    break;
-                case "2":
                     appController.sewa();
                     break;
-                case "3":
+                case "2":
                     appController.tampilkanLaporanPenyewaan();
                     break;
                 default:
@@ -39,15 +30,15 @@ public class App {
             }
         }
 
-        System.out.println("Sampai Jumpa");
+        System.out.println("===SAMPAI JUMPA===");
 
     }
 
     public static void tampilkanMenu() {
-        System.out.println("1. Lihat daftar Kamar");
-        System.out.println("2. Sewa");
-        System.out.println("3. Laporan Penyewaan");
-        System.out.println("4. Keluar");
+        System.out.println("");
+        System.out.println("1. Sewa");
+        System.out.println("2. Cetak Struk");
+        System.out.println("3. Keluar");
     }
     // public static void masukanNama() {
     //     System.out.print("Masukan Nama Pewnyewa : ");

@@ -65,15 +65,15 @@ public class AppController {
         kamars.put(kamarB3.getIdKamar(), kamarB3);
         
         
-        // Penyewa Penyewa1 = new Penyewa();
+        Penyewa Penyewa1 = new Penyewa();
         // Penyewa Penyewa2 = new Penyewa();
 
-        // Penyewa1.setIdPenyewa("P1")
-        //         .setJenisKelamin("Laki-Laki")
-        //         .setNoTelp("085797047633")
-        //         .setNama("Raihan")
-        //         .setEmail("raian@gmail.com").
-        //         setAlamat("Bandung");
+        Penyewa1.setIdPenyewa("P1")
+                .setJenisKelamin("Laki-Laki")
+                .setNoTelp("085797047633")
+                .setNama("Raihan")
+                .setEmail("raian@gmail.com").
+                setAlamat("Bandung");
         // Penyewa2.setIdPenyewa("P2")
         //         .setJenisKelamin("Perempuan")
         //         .setNoTelp("085797047644")
@@ -81,7 +81,7 @@ public class AppController {
         //         .setEmail("layla@gmail.com")
         //         .setAlamat("Jakarta");
 
-        // penyewas.put(Penyewa1.getIdPenyewa(), Penyewa1);
+        penyewas.put(Penyewa1.getIdPenyewa(), Penyewa1);
         // penyewas.put(Penyewa2.getIdPenyewa(), Penyewa2);
         
         Owner Owner1 = new Owner();
@@ -96,43 +96,44 @@ public class AppController {
         owners.put(Owner1.getIdOwner(), Owner1);
     }
 
-    public void Psewa(){
-        Scanner input = new Scanner(System.in);
-        boolean ulang = true;
-        while (ulang) {
-            System.out.println("========== Login Owner ==========");
-            System.out.print("Masukan Nama: ");
-            String nama = input.nextLine();
-            System.out.println("");
+    // public void Psewa(){
+    //     Scanner input = new Scanner(System.in);
+    //     boolean ulang = true;
+    //     while (ulang) {
+    //         System.out.println("========== Login Owner ==========");
+    //         System.out.print("Masukan Nama: ");
+    //         String nama = input.nextLine();
+    //         System.out.println("");
             
 
-            for(Owner owner : owners.values()) {
-                if(owner.getNama().equals(nama)) {
-                    System.out.println("Selamat Datang, " + owner.getNama());
-                    System.out.println("");
-                    ulang = false;
-                    return;
+    //         for(Owner owner : owners.values()) {
+    //             if(owner.getNama().equals(nama)) {
+    //                 System.out.println("Selamat Datang, " + owner.getNama());
+    //                 System.out.println("");
+    //                 ulang = false;
+    //                 return;
 
-                }
-                System.out.println("Nama yang anda masukan salah! Masukan ulang!");
-            }
-        }
+    //             }
+    //             System.out.println("Nama yang anda masukan salah! Masukan ulang!");
+    //         }
+    //     }
         
-    }
+    // }
     public void dataPenyewa(){
         Scanner input = new Scanner(System.in);
-        System.out.println("Masukan Data Pembeli:");
-        System.out.println("Masukan ID\t:");
-        String idPenyewa = input.nextLine();
-        System.out.print("Masukan Nama\t:");
+        System.out.println("=======SELAMAT DATANG DI MAMIKOS=======");
+        System.out.println("Silahkan Masukan Data Anda:");
+        System.out.print("Nama\t\t:");
         String nama = input.nextLine();
-        System.out.print("Masukan Jenis Kelamin\t:");
+        System.out.print("ID\t\t:");
+        String idPenyewa = input.nextLine();
+        System.out.print("Jenis Kelamin\t:");
         String jenisKelamin = input.nextLine();
-        System.out.print("Masukan Alamat\t:");
+        System.out.print("Alamat\t\t:");
         String alamat = input.nextLine();
-        System.out.print("Masukan Email\t:");
+        System.out.print("Email\t\t:");
         String email = input.nextLine();
-        System.out.print("Masukan No Telp\t:");
+        System.out.print("No Telp\t\t:");
         String noTelp = input.nextLine();
         
         Penyewa penyewaBaru = new Penyewa();
@@ -145,12 +146,12 @@ public class AppController {
         penyewaBaru.setNoTelp(noTelp);
 
         penyewas.put(penyewaBaru.getIdPenyewa(), penyewaBaru);
-
+        lihatDaftarKamar();
     }
 
     public void lihatDaftarKamar() {
         System.out.println();
-        System.out.println("==== Daftar Kamar ====");
+        System.out.println("===================Daftar Kamar===================");
         for (Map.Entry<String, Kamar> Kamar : kamars.entrySet()) {
             String key = Kamar.getKey();
             Kamar tKamar = Kamar.getValue();
@@ -160,8 +161,8 @@ public class AppController {
                 System.out.println("Harga \t\t :" + tKamar.getHargaKamar() + "/bulan");
                 System.out.println("");
             }
-
         }
+        System.out.println("====================================================");
     }
 
     public Kamar getKamar(String idKamar) {
@@ -200,7 +201,7 @@ public class AppController {
 
             } while (lanjut.equalsIgnoreCase("Y"));
             System.out.println("");
-            System.out.println("===Berikut Daftar Kamar Anda===");
+            System.out.println("============Berikut Daftar Kamar Anda============");
             tampilkanDaftarKamar(tDetailKamars);
             System.out.println("TOTAL: " + hitungTotalKamar(tDetailKamars));
             BufferedReader inputKonfirmasi = new BufferedReader(new InputStreamReader(System.in));
@@ -238,21 +239,23 @@ public class AppController {
         }
         return total;
     }
-
+    
     public void tampilkanLaporanPenyewaan() {
         for (Penyewaan penyewaan : penyewaans) {
             System.err.println();
-            System.out.println("No Penyewaan \t :"+penyewaan.getIdPenyewaan());
-            System.out.println("Tanggal transaksi \t :"+penyewaan.getTanggal());
+            System.out.println("===================SEWA KOS MAMIKOS===================");
+            System.out.println("No Penyewaan \t : "+penyewaan.getIdPenyewaan());
+            System.out.println("Tanggal transaksi: "+penyewaan.getTanggal());
             System.out.println("Owner \t \t : "+penyewaan.getOwner().getNama());
-            System.out.println("Penyewa \t \t : "+penyewaan.getPenyewa().getNama());
-            System.out.println("=========================");
+            System.out.println("Penyewa \t : "+penyewaan.getPenyewa().getNama());
+            System.out.println("======================================================");
             ArrayList<DetailKamar> detailKamars = penyewaan.getDetailKamars();
             for (DetailKamar dk : detailKamars) {
-                System.out.println("Jenis Kamar \t \t : " + dk.getKamar().getJenisKamar());
-                System.out.println("Subtotal \t \t : " + dk.getSubTotal());
+                System.out.println("No Kamar \t :" + dk.getKamar().getIdKamar());
+                System.out.println("Jenis Kamar \t :" + dk.getKamar().getJenisKamar());
+                System.out.println("Harga \t\t :" + dk.getHargaJual()+ "/bulan");
             }
-            System.out.println("=========================");
+            System.out.println("======================================================");
             System.out.println("Total \t \t : "+penyewaan.getTotal());
         }
     }
