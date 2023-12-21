@@ -3,7 +3,9 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+
 import controller.AppController;
+
 
 public class App {
 
@@ -40,9 +42,5 @@ public class App {
         System.out.println("2. Cetak Struk");
         System.out.println("3. Keluar");
     }
-    // public static void masukanNama() {
-    //     System.out.print("Masukan Nama Pewnyewa : ");
-    //     System.out.print("Masukan Email Pewnyewa : ");
-    //     System.out.print("Masukan No Telp Pewnyewa : ");
-    // }
+
 }
